@@ -18,43 +18,45 @@ const enemy = {
 
 $btn.addEventListener('click',function(){
     console.log('Kick');    
-    cHP(random(20),charter);
-    cHP(random(20),enemy);
+    cHP.call(charter, random(20));
+    cHP.call(enemy, random(20));
 })
 
 $bts.addEventListener('click',function(){
     console.log('Kick');    
-    cHP(100,enemy);
+    cHP.call(enemy,100);
 })
 
 function init(){
     console.log('start');
-
+    renderHP.call(charter);
+    renderHP.call(enemy);
 }
 
-
-
-function renderHp(person){
-   person.elHP.innerText = person.dmg + '/' + person.HP;
+function renderHP(){
+    renderHp1.call(this);
+    renderbar1.call(this);
 }
 
-function rendebar(person){
-    person.elProgressbar.style.width = person.dmg + '%';
+function renderHp1(){
+   this.elHP.innerText = this.dmg + '/' + this.HP;
 }
 
-function cHP(count,person){
-    if (person.dmg <= count){
-        person.dmg = 0;
-        alert (person.name + ' проиграл бой');
+function renderbar1(){
+    this.elProgressbar.style.width = this.dmg + '%';
+}
+
+function cHP(count){
+    if (this.dmg <= count){
+        this.dmg = 0;
+        alert (this.name + ' проиграл бой');
         $btn.disabled = true;
         $bts.disabled = true;
     }
     else{
-    person.dmg -= count;
+    this.dmg -= count;
     }
-    renderHp(person)
-    rendebar(person)
- 
+    renderHP.call(this) 
 }
 
 function random(num){
