@@ -2,19 +2,34 @@ const $btn = document.getElementById('btn-kick');
 const $bts = document.getElementById('btn-kill');
 const charter = {
     name: 'Pikachu',
-    HP: 100,
-    dmg: 100,   
+    type: 'Electric',
+    weak: ['fighting','water','some'],
+    resistance: ['steel'], 
+    hp:{HP: 100,
+    dmg: 100,
+    },   
     elHP: document.getElementById('health-character'),
     elProgressbar: document.getElementById('progressbar-character'),
 
 }
+
 const enemy = {
     name: 'Charmandar',
-    HP: 100,
-    dmg: 100,   
+    type: 'fire',
+    weak: ['fighting','water','some'],
+    resistance: ['water'], 
+    hp:{HP: 100,
+    dmg: 100,
+    },   
     elHP: document.getElementById('health-enemy'),
     elProgressbar: document.getElementById('progressbar-enemy'),
 }
+
+const {name,...rest} = charter;
+console.log(name,rest);
+const {name: Ename,...Erest} = enemy;
+console.log(Ename,Erest);
+
 
 $btn.addEventListener('click',function(){
     console.log('Kick');    
@@ -39,25 +54,42 @@ function renderHP(){
 }
 
 function renderHp1(){
-   this.elHP.innerText = this.dmg + '/' + this.HP;
+   this.elHP.innerText = this.hp.dmg + '/' + this.hp.HP;
 }
 
 function renderbar1(){
-    this.elProgressbar.style.width = this.dmg + '%';
+    this.elProgressbar.style.width = this.hp.dmg + '%';
 }
-
+i = 0;
 function cHP(count){
-    if (this.dmg <= count){
-        this.dmg = 0;
+
+    if (this.hp.dmg <= count){
+        this.hp.dmg = 0;
         alert (this.name + ' проиграл бой');
         $btn.disabled = true;
         $bts.disabled = true;
     }
     else{
-    this.dmg -= count;
+    this.hp.dmg -= count;
     }
+    
+    const log = this === enemy ? rlog(this,charter,count): rlog(this,enemy,count);
+    console.log(log); 
+    
+    const $p = document.createElement('p');
+
+    $p.innerText = log;
+    const $logs = document.querySelector('#logs');
+    $logs.insertBefore($p,$logs.children[0]);
+
     renderHP.call(this) 
 }
+
+
+const $p = document.createElement('p');
+
+
+
 
 function random(num){
     return Math.ceil(Math.random() * num);
