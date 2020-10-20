@@ -10,7 +10,8 @@ const charter = {
     },   
     elHP: document.getElementById('health-character'),
     elProgressbar: document.getElementById('progressbar-character'),
-
+    renderHP: renderHP,
+    cHP: cHP,  
 }
 
 const enemy = {
@@ -23,6 +24,8 @@ const enemy = {
     },   
     elHP: document.getElementById('health-enemy'),
     elProgressbar: document.getElementById('progressbar-enemy'),
+    renderHP: renderHP,
+    cHP: cHP,  
 }
 
 const {name,...rest} = charter;
@@ -33,33 +36,27 @@ console.log(Ename,Erest);
 
 $btn.addEventListener('click',function(){
     console.log('Kick');    
-    cHP.call(charter, random(20));
-    cHP.call(enemy, random(20));
+    charter.cHP(random(20));
+    enemy.cHP(random(20));
 })
 
 $bts.addEventListener('click',function(){
     console.log('Kick');    
-    cHP.call(enemy,100);
+    enemy.cHP(100);
 })
 
 function init(){
     console.log('start');
-    renderHP.call(charter);
-    renderHP.call(enemy);
+    charter.renderHP();
+    enemy.renderHP();
 }
 
 function renderHP(){
-    renderHp1.call(this);
-    renderbar1.call(this);
-}
-
-function renderHp1(){
-   this.elHP.innerText = this.hp.dmg + '/' + this.hp.HP;
-}
-
-function renderbar1(){
+    this.elHP.innerText = this.hp.dmg + '/' + this.hp.HP;
     this.elProgressbar.style.width = this.hp.dmg + '%';
 }
+
+
 i = 0;
 function cHP(count){
 
@@ -82,7 +79,7 @@ function cHP(count){
     const $logs = document.querySelector('#logs');
     $logs.insertBefore($p,$logs.children[0]);
 
-    renderHP.call(this) 
+   this.renderHP(); 
 }
 
 
