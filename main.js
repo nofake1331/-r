@@ -5,13 +5,14 @@ const charter = {
     type: 'Electric',
     weak: ['fighting','water','some'],
     resistance: ['steel'], 
-    hp:{HP: 100,
-    dmg: 100,
-    },   
+    hp: {
+        HP: 100,
+        dmg: 100
+      },
     elHP: document.getElementById('health-character'),
     elProgressbar: document.getElementById('progressbar-character'),
-    renderHP: renderHP,
-    cHP: cHP,  
+    renderHP,
+    cHP,  
 }
 
 const enemy = {
@@ -24,8 +25,8 @@ const enemy = {
     },   
     elHP: document.getElementById('health-enemy'),
     elProgressbar: document.getElementById('progressbar-enemy'),
-    renderHP: renderHP,
-    cHP: cHP,  
+    renderHP,
+    cHP,  
 }
 
 const {name,...rest} = charter;
