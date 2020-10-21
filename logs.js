@@ -1,5 +1,5 @@
 function rlog(FPerson,SPerson,count){
-const { FPname , hp:{HP,dmg}} = FPerson; 
+const { name: FPname , hp:{HP,dmg}} = FPerson; 
 const { name: SPname } = SPerson; 
 
 const logs = [
