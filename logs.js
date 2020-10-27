@@ -1,4 +1,4 @@
-function rlog(FPerson,SPerson,count){
+const rlog = (FPerson,SPerson,count)=>{
 const { name: FPname , hp:{HP,dmg}} = FPerson; 
 const { name: SPname } = SPerson; 
 

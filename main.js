@@ -39,14 +39,40 @@ $btn.addEventListener('click',function(){
     console.log('Kick');    
     charter.cHP(random(20));
     enemy.cHP(random(20));
+    count(1);
 })
 
 $bts.addEventListener('click',function(){
     console.log('Kick');    
-    enemy.cHP(100);
+    enemy.cHP(1);
+    count(1);
 })
 
-function init(){
+const  click =(i) =>{
+  return function (n =0 )
+  {
+    if  (i < 5){
+     i+=n;
+     
+     console.log('Кликов по кнопкам =',i,'Осталось кликов=',6-i);
+    }
+     else{
+        i+=n;
+        $btn.disabled = true;
+        $bts.disabled = true;
+        console.log('Кликов по кнопкам =',i,'Осталось кликов=',6-i);
+     } 
+
+  } 
+
+}
+const count = click(0);
+
+
+
+
+
+const init = ()=>{
     console.log('start');
     charter.renderHP();
     enemy.renderHP();
@@ -89,7 +115,7 @@ const $p = document.createElement('p');
 
 
 
-function random(num){
+const random = (num) =>{
     return Math.ceil(Math.random() * num);
 }
 init();
