@@ -39,7 +39,7 @@ $btn.addEventListener('click',function(){
     console.log('Kick');    
     charter.cHP(random(20));
     enemy.cHP(random(20));
-    count(1);
+    count(1)
 })
 
 $bts.addEventListener('click',function(){
@@ -48,25 +48,26 @@ $bts.addEventListener('click',function(){
     count(1);
 })
 
-const  click =(i) =>{
+const  click =(i,z) =>{
+  x=z--
   return function (n =0 )
   {
-    if  (i < 5){
+    
+    if  (i < z){
      i+=n;
-     
-     console.log('Кликов по кнопкам =',i,'Осталось кликов=',6-i);
+     console.log('Кликов по кнопкам =',i,'Осталось кликов=',x-i);
     }
      else{
         i+=n;
         $btn.disabled = true;
         $bts.disabled = true;
-        console.log('Кликов по кнопкам =',i,'Осталось кликов=',6-i);
+        console.log('Кликов по кнопкам =',i,'Осталось кликов=',x-i);
      } 
 
   } 
 
 }
-const count = click(0);
+const count = click(0,10);
 
 
 
