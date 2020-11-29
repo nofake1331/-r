@@ -1,122 +1,41 @@
+import Pokemon from "./pokemon.js";
+import util from "./util.js";
 const $btn = document.getElementById('btn-kick');
 const $bts = document.getElementById('btn-kill');
-const charter = {
-    name: 'Pikachu',
-    type: 'Electric',
-    weak: ['fighting','water','some'],
-    resistance: ['steel'], 
-    hp: {
-        HP: 100,
-        dmg: 100
-      },
-    elHP: document.getElementById('health-character'),
-    elProgressbar: document.getElementById('progressbar-character'),
-    renderHP,
-    cHP,  
-}
 
-const enemy = {
-    name: 'Charmandar',
+const player1 = new Pokemon({
+    name:'Pikachu',
+    type: 'electric',
+    hp: 100,
+    selectors: 'character'
+})
+const player2 = new Pokemon({
+    name:'Charmander',
     type: 'fire',
-    weak: ['fighting','water','some'],
-    resistance: ['water'], 
-    hp:{HP: 100,
-    dmg: 100,
-    },   
-    elHP: document.getElementById('health-enemy'),
-    elProgressbar: document.getElementById('progressbar-enemy'),
-    renderHP,
-    cHP,  
-}
+    hp: 100,
+    selectors: 'enemy'
+})
 
-const {name,...rest} = charter;
-console.log(name,rest);
-const {name: Ename,...Erest} = enemy;
-console.log(Ename,Erest);
+ 
 
 
 $btn.addEventListener('click',function(){
-    console.log('Kick');    
-    charter.cHP(random(20));
-    enemy.cHP(random(20));
+    console.log('Kick');  
+    let counts = util.random(20); 
+    player1.cHP(counts);
+    player2.cHP(counts);
+    util.rlog(player2,player1,counts)
     count(1)
 })
 
 $bts.addEventListener('click',function(){
     console.log('Kick');    
-    enemy.cHP(1);
+    player2.cHP(1);
+    util.rlog(player2,player1,1)
     count(1);
 })
 
-const  click =(i,z) =>{
-  x=z--
-  return function (n =0 )
-  {
-    
-    if  (i < z){
-     i+=n;
-     console.log('Кликов по кнопкам =',i,'Осталось кликов=',x-i);
-    }
-     else{
-        i+=n;
-        $btn.disabled = true;
-        $bts.disabled = true;
-        console.log('Кликов по кнопкам =',i,'Осталось кликов=',x-i);
-     } 
 
-  } 
+const count = util.click(0,10);
 
-}
-const count = click(0,10);
-
-
-
-
-
-const init = ()=>{
-    console.log('start');
-    charter.renderHP();
-    enemy.renderHP();
-}
-
-function renderHP(){
-    this.elHP.innerText = this.hp.dmg + '/' + this.hp.HP;
-    this.elProgressbar.style.width = this.hp.dmg + '%';
-}
-
-
-i = 0;
-function cHP(count){
-
-    if (this.hp.dmg <= count){
-        this.hp.dmg = 0;
-        alert (this.name + ' проиграл бой');
-        $btn.disabled = true;
-        $bts.disabled = true;
-    }
-    else{
-    this.hp.dmg -= count;
-    }
-    
-    const log = this === enemy ? rlog(this,charter,count): rlog(this,enemy,count);
-    console.log(log); 
-    
-    const $p = document.createElement('p');
-
-    $p.innerText = log;
-    const $logs = document.querySelector('#logs');
-    $logs.insertBefore($p,$logs.children[0]);
-
-   this.renderHP(); 
-}
-
-
-const $p = document.createElement('p');
-
-
-
-
-const random = (num) =>{
-    return Math.ceil(Math.random() * num);
-}
-init();
+ 
