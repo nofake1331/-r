@@ -1,14 +1,15 @@
-
-const $btn = document.getElementById('btn-kick');
-const $bts = document.getElementById('btn-kill');
-
 const random = (num) => {
     return Math.ceil(Math.random() * num);
 };
 
+const randomat = (min,max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+
+};
+
 const  click =(i,z,x) =>{
     x=z--
-    return function (n =0 )
+    return function (n =0,btn )
     {
       
       if  (i < z){
@@ -17,15 +18,13 @@ const  click =(i,z,x) =>{
       }
        else{
           i+=n;
-          $btn.disabled = true;
-          $bts.disabled = true;
+          btn.disabled = true;
           console.log('Кликов по кнопкам =',i,'Осталось кликов=',x-i);
        } 
   
     } 
   
   }
-
 
 const rlog = (FPerson,SPerson,count)=>{
     const { name: FPname , hp:{HP,dmg}} = FPerson; 
@@ -51,4 +50,4 @@ const rlog = (FPerson,SPerson,count)=>{
     
   
 
-export default {random,rlog,click,print};
+export default {random,randomat,rlog,click,print};
